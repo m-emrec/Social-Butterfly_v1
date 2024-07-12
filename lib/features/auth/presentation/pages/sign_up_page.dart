@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_butterfly/core/utils/mixins/email_validator_mixin.dart';
 
 import '../../../../core/constants/enums/icons_enum.dart';
 import '../../../../core/utils/widgets/buttons.dart';
@@ -13,10 +14,13 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> with SignUpMixin {
+class _SignUpPageState extends State<SignUpPage>
+    with SignUpMixin, EmailValidatorMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthPage(
+      emailValidator: validateEmail,
+      authBloc: authBloc,
       title: pageTitle,
       formKey: formKey,
       textButton: TextButton(
@@ -26,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpMixin {
       primaryButton: Row(
         children: [
           ExpandedElevatedButton(
-            onPressed: () {},
+            onPressed: onSignUpButtonPressed,
             child: Text(primaryButtonLabel),
           ),
         ],
@@ -34,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpMixin {
       googleButton: Row(
         children: [
           ExpandedOutlinedIconButton(
-            onPressed: () {},
+            onPressed: onGoogleSignInPressed,
             label: Text(googleButtonLabel),
             icon: Image.asset(IconsEnum.googleSignIn.path),
           )

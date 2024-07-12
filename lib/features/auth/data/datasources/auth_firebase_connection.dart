@@ -11,8 +11,11 @@ class AuthFirebaseConnection extends FireBaseConnection {
     required String password,
   }) async {
     try {
-      firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
       return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
     } catch (e) {
       logger.e(e);
       return DataFailed(e.toString());
@@ -24,11 +27,13 @@ class AuthFirebaseConnection extends FireBaseConnection {
     required String password,
   }) async {
     try {
-      firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
     } catch (e) {
       logger.e(e);
       return DataFailed(e.toString());
@@ -39,10 +44,12 @@ class AuthFirebaseConnection extends FireBaseConnection {
     required String email,
   }) async {
     try {
-      firebaseAuth.sendPasswordResetEmail(
+      await firebaseAuth.sendPasswordResetEmail(
         email: email,
       );
       return DataSuccess(null);
+    } on FirebaseAuthException catch (e) {
+      return DataFailed(e.code);
     } catch (e) {
       logger.e(e);
       return DataFailed(e.toString());

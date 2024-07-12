@@ -17,25 +17,28 @@ class _SignInPageState extends State<SignInPage> with SignInMixin {
   @override
   Widget build(BuildContext context) {
     return BaseAuthPage(
+      authBloc: authBloc,
       showForgotPassword: true,
       title: pageTitle,
       formKey: formKey,
-      textButton: TextButton(
-        onPressed: () => navigateToSignUp(context),
-        child: Text(textButtonLabel),
-      ),
+
+      /// Sign In button
       primaryButton: Row(
         children: [
           ExpandedElevatedButton(
-            onPressed: () {},
+            onPressed: onSignInButtonPressed,
             child: Text(primaryButtonLabel),
           ),
         ],
       ),
+      textButton: TextButton(
+        onPressed: () => navigateToSignUp(context),
+        child: Text(textButtonLabel),
+      ),
       googleButton: Row(
         children: [
           ExpandedOutlinedIconButton(
-            onPressed: () {},
+            onPressed: onGoogleSignInPressed,
             label: Text(googleButtonLabel),
             icon: Image.asset(IconsEnum.googleSignIn.path),
           )

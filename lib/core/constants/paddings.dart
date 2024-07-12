@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppPaddings {
   ///8
   static double smallPadding = 8.0;
@@ -10,4 +12,8 @@ class AppPaddings {
 
   /// 64
   static double xlargePadding = 64.0;
+
+  /// Horizontal padding
+  static EdgeInsets pageHPadding =
+      EdgeInsets.symmetric(horizontal: mediumPadding);
 }

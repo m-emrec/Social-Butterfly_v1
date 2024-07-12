@@ -40,7 +40,7 @@ class ExpandedOutlinedIconButton extends StatelessWidget {
       child: OutlinedButton.icon(
         iconAlignment: IconAlignment.start,
         label: label,
-        onPressed: () {},
+        onPressed: onPressed,
         icon: icon,
       ),
     );
