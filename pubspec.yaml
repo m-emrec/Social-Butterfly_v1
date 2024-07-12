@@ -27,6 +27,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   firebase_auth: ^5.1.2
   google_sign_in: ^6.2.1
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_native_splash: ^2.4.1
@@ -59,6 +60,8 @@ flutter:
 
   assets:
     - lib/core/assets/
+    - lib/core/assets/icons/
+    - lib/core/assets/images/
     
 
 
