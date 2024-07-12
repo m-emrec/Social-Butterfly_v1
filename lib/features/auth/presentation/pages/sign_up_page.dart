@@ -20,7 +20,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpMixin {
       title: pageTitle,
       formKey: formKey,
       textButton: TextButton(
-        onPressed: () {},
+        onPressed: () => navigateToSignIn(context),
         child: Text(textButtonLabel),
       ),
       primaryButton: Row(

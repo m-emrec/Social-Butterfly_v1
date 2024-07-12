@@ -24,7 +24,7 @@ class _AuthManagerState extends State<AuthManager> {
 
           /// if the user is not authenticated navigate them to [SignInPage]
         } else {
-          return const SignUpPage();
+          return const SignInPage();
         }
       },
     );
