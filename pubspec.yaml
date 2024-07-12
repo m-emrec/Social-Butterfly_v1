@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: 
   # Firebase related dependencies : 
   firebase_core: ^3.1.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_native_splash: ^2.4.1
@@ -22,6 +23,11 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^4.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/core/assets/AppIcon.png" 
 
 flutter_native_splash:
   color: "#F4F4F9" # Background color of the splash screen
