@@ -6,3 +6,9 @@ abstract class CreatePostEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class CreatePostSendPostEvent extends CreatePostEvent {
+  final PostModel postModel;
+
+  const CreatePostSendPostEvent({required this.postModel});
+}

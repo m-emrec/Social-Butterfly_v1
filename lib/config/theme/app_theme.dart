@@ -27,9 +27,6 @@ class AppTheme {
     /// Outlined Button theme
     outlinedButtonTheme: _outlinedButtonTheme,
 
-    /// Icon button theme
-    iconButtonTheme: _iconButtonTheme,
-
     dividerTheme: DividerThemeData(
       color: AppColors.darkTextColor,
     ),
@@ -56,19 +53,6 @@ class AppTheme {
           padding: EdgeInsets.symmetric(
             vertical: AppPaddings.mediumPadding,
             horizontal: AppPaddings.mediumPadding,
-          ),
-        ),
-      );
-
-  static IconButtonThemeData get _iconButtonTheme => IconButtonThemeData(
-        style: IconButton.styleFrom(
-          padding: EdgeInsets.all(
-            AppPaddings.xsmallPadding,
-          ),
-          backgroundColor: AppColors.primaryColor,
-          foregroundColor: AppColors.backgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.mediumBorderRadius,
           ),
         ),
       );
@@ -114,6 +98,8 @@ class AppTheme {
         ),
         color: Colors.transparent,
         scrolledUnderElevation: 0,
+        // iconTheme: IconThemeData()
+
         foregroundColor: AppColors.darkTextColor,
       );
 

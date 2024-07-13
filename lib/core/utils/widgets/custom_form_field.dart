@@ -16,6 +16,8 @@ abstract class CustomFormField extends TextFormField {
     super.validator,
     super.obscureText,
     this.helper,
+    this.expands = false,
+    this.constraints,
   });
 
   final String label;
@@ -26,6 +28,9 @@ abstract class CustomFormField extends TextFormField {
   final TextInputType? keyboardType;
   final Iterable<String>? autofillHints;
   final TextInputAction? textInputAction;
+  final bool expands;
+  final BoxConstraints? constraints;
+
   @override
   AutovalidateMode get autovalidateMode => AutovalidateMode.onUserInteraction;
 
@@ -36,6 +41,8 @@ abstract class CustomFormField extends TextFormField {
           hintText: hintText,
           icon: icon,
           suffix: suffix,
+          constraints: constraints,
+          alignLabelWithHint: true,
         ),
         autofillHints: autofillHints,
         autovalidateMode: autovalidateMode,
@@ -43,6 +50,10 @@ abstract class CustomFormField extends TextFormField {
         keyboardType: keyboardType,
         validator: validator,
         textInputAction: textInputAction,
+        expands: expands,
+        minLines: expands ? null : 1,
+        maxLines: expands ? null : 1,
+        textAlignVertical: TextAlignVertical.top,
       );
 }
 
@@ -118,4 +129,42 @@ class PasswordField extends CustomFormField {
           obscureText: _obscureText,
         ),
       );
+}
+
+class NormalTextFormField extends CustomFormField {
+  NormalTextFormField({
+    super.key,
+    super.controller,
+    super.label,
+    super.hintText,
+    super.keyboardType = TextInputType.emailAddress,
+    super.textInputAction = TextInputAction.next,
+    super.validator,
+  });
+
+  @override
+  String get label => "Header";
+  @override
+  TextInputType? get keyboardType => TextInputType.text;
+}
+
+class NormalTextAreaFormField extends CustomFormField {
+  NormalTextAreaFormField({
+    super.key,
+    super.controller,
+    super.label,
+    super.hintText,
+    super.textInputAction = TextInputAction.next,
+    super.validator,
+    super.constraints,
+  });
+  @override
+  bool get expands => true;
+  @override
+  String get label => "Content";
+  @override
+  TextInputType? get keyboardType => TextInputType.multiline;
+  @override
+  // TODO: implement textInputAction
+  TextInputAction? get textInputAction => TextInputAction.newline;
 }

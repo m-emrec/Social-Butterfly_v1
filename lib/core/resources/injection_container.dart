@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:social_butterfly/logger.dart';
 
 abstract class InjectionContainer {
   final GetIt _sl = GetIt.instance;

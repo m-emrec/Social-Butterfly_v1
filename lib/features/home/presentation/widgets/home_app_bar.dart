@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_butterfly/core/utils/widgets/buttons.dart';
 
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/enums/asset_enums.dart';
@@ -26,7 +27,7 @@ class HomeAppBar extends StatelessWidget {
         // Create new post button.
         Padding(
           padding: EdgeInsets.only(right: AppPaddings.smallPadding),
-          child: IconButton.filled(
+          child: CustomIconButton(
             onPressed: () => _onCreatePostPressed(context),
             icon: Icon(
               Icons.add,

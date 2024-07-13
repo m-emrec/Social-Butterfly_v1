@@ -33,6 +33,8 @@ dependencies:
 
   rive: ^0.13.9
   skeletonizer: ^1.3.0
+  firebase_storage: ^12.1.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_native_splash: ^2.4.1

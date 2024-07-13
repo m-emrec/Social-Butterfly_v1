@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../../../core/constants/paddings.dart';
 
+import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/models/post_model.dart';
+import '../../../../core/utils/widgets/buttons.dart';
 
 class PostWidgetSkeleton extends StatelessWidget {
   const PostWidgetSkeleton({super.key});
@@ -38,12 +39,12 @@ class PostWidgetSkeleton extends StatelessWidget {
             ),
             // Header
             Text(
-              _DUMMY_POST.header,
+              _DUMMY_POST.header!,
               style: context.textTheme.titleMedium,
             ),
             // User name
             Text(
-              _DUMMY_POST.publishedBy,
+              _DUMMY_POST.publishedBy!,
               style: context.textTheme.titleSmall,
             ),
             // date
@@ -53,19 +54,19 @@ class PostWidgetSkeleton extends StatelessWidget {
             ),
             // Content
             Text(
-              _DUMMY_POST.content,
+              _DUMMY_POST.content!,
               style: context.textTheme.bodySmall,
             ),
             Gap(AppPaddings.xsmallPadding),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
+                CustomIconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.abc),
                 ),
                 Gap(AppPaddings.mediumPadding),
-                IconButton(
+                CustomIconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.abc),
                 )

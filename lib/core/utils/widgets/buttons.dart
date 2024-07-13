@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/enums/asset_enums.dart';
+import '../../../config/theme/app_theme.dart';
+import '../../constants/border_radius.dart';
+import '../../constants/paddings.dart';
 
 class ExpandedElevatedButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -43,6 +45,33 @@ class ExpandedOutlinedIconButton extends StatelessWidget {
         onPressed: onPressed,
         icon: icon,
       ),
+    );
+  }
+}
+
+class CustomIconButton extends StatelessWidget {
+  final Widget icon;
+
+  final void Function()? onPressed;
+
+  const CustomIconButton(
+      {super.key, required this.icon, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton.filled(
+      style: IconButton.styleFrom(
+        padding: EdgeInsets.all(
+          AppPaddings.xsmallPadding,
+        ),
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: AppBorderRadius.mediumBorderRadius,
+        ),
+      ),
+      onPressed: onPressed,
+      icon: icon,
     );
   }
 }
