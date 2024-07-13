@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:social_butterfly/features/auth/data/datasources/auth_injection_container.dart';
-import 'package:social_butterfly/features/auth/presentation/pages/sign_in_page.dart';
+import '../../../home/presentation/pages/home_page.dart';
+import '../../data/datasources/auth_injection_container.dart';
+import 'sign_in_page.dart';
 
 class AuthManager extends StatefulWidget {
   const AuthManager({super.key});
@@ -23,12 +24,7 @@ class _AuthManagerState extends State<AuthManager> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return GestureDetector(
-            onTap: () => FirebaseAuth.instance.signOut(),
-            child: const Center(
-              child: Text("asd"),
-            ),
-          );
+          return const HomePage();
 
           /// if the user is not authenticated navigate them to [SignInPage]
         } else {

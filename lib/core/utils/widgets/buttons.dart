@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/enums/icons_enum.dart';
+import '../../constants/enums/asset_enums.dart';
 
 class ExpandedElevatedButton extends StatelessWidget {
   final void Function()? onPressed;

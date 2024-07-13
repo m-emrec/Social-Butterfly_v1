@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_butterfly/core/utils/mixins/email_validator_mixin.dart';
 
-import '../../../../core/constants/enums/icons_enum.dart';
+import '../../../../core/constants/enums/asset_enums.dart';
 import '../../../../core/utils/widgets/buttons.dart';
 import '../mixins/sign_up_mixin.dart';
 import '../widgets/base_auth_page.dart';
@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage>
           ExpandedOutlinedIconButton(
             onPressed: onGoogleSignInPressed,
             label: Text(googleButtonLabel),
-            icon: Image.asset(IconsEnum.googleSignIn.path),
+            icon: Image.asset(AssetsEnum.googleSignIn.path),
           )
         ],
       ),

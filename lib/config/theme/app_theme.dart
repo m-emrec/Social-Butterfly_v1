@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_butterfly/core/constants/paddings.dart';
+import '../../core/constants/paddings.dart';
 import '../../core/constants/border_radius.dart';
 
 class AppTheme {
@@ -12,6 +12,7 @@ class AppTheme {
     /// App bar theme
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
+      scrolledUnderElevation: 0,
       foregroundColor: AppColors.darkTextColor,
     ),
 
@@ -49,6 +50,11 @@ class AppTheme {
       ),
     ),
 
+    // Card Theme
+    cardTheme: const CardTheme(
+      elevation: 0,
+    ),
+
     /// Elevated Button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -73,6 +79,21 @@ class AppTheme {
         ),
       ),
     ),
+
+    /// Icon button theme
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        padding: EdgeInsets.all(
+          AppPaddings.mediumPadding - AppPaddings.xsmallPadding,
+        ),
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: AppBorderRadius.mediumBorderRadius,
+        ),
+      ),
+    ),
+
     dividerTheme: DividerThemeData(
       color: AppColors.darkTextColor,
     ),

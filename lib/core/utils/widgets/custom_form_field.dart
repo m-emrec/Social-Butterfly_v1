@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:social_butterfly/core/constants/enums/icons_enum.dart';
+import 'package:social_butterfly/core/constants/enums/asset_enums.dart';
 
 abstract class CustomFormField extends TextFormField {
   CustomFormField({
@@ -97,7 +97,9 @@ class PasswordField extends CustomFormField {
             icon: icon,
             suffix: GestureDetector(
               child: Image.asset(
-                _obscureText ? IconsEnum.locked.path : IconsEnum.openLock.path,
+                _obscureText
+                    ? AssetsEnum.locked.path
+                    : AssetsEnum.openLock.path,
                 filterQuality: FilterQuality.high,
               ),
               onTap: () {

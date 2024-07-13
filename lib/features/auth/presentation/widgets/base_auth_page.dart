@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:social_butterfly/config/theme/app_theme.dart';
+import 'package:social_butterfly/core/constants/enums/asset_enums.dart';
 import 'package:social_butterfly/core/extensions/context_extension.dart';
 import 'package:social_butterfly/core/utils/mixins/loading_indicator_mixin.dart';
 import 'package:social_butterfly/features/auth/presentation/bloc/auth_bloc.dart';
@@ -87,7 +88,7 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
             image: DecorationImage(
               fit: BoxFit.fill,
               image: AssetImage(
-                "auth_bg_image".toPngImage,
+                AssetsEnum.authBackgroundImage.path,
               ),
             ),
           ),

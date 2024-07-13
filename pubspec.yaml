@@ -31,6 +31,9 @@ dependencies:
   cloud_firestore: ^5.1.0
   email_validator: ^3.0.0
 
+  rive: ^0.13.9
+  skeletonizer: ^1.3.0
+
 dev_dependencies:
   flutter_native_splash: ^2.4.1
   flutter_test:
@@ -64,6 +67,7 @@ flutter:
     - lib/core/assets/
     - lib/core/assets/icons/
     - lib/core/assets/images/
+    - lib/core/assets/animations/
     
 
 
