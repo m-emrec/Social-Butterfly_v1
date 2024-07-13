@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:social_butterfly/logger.dart';
 
 import '../../../../core/resources/data_state.dart';
 
@@ -17,7 +16,6 @@ class AuthFirebaseConnection extends FireBaseConnection {
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.code);
     } catch (e) {
-      logger.e(e);
       return DataFailed(e.toString());
     }
   }
@@ -35,7 +33,6 @@ class AuthFirebaseConnection extends FireBaseConnection {
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.code);
     } catch (e) {
-      logger.e(e);
       return DataFailed(e.toString());
     }
   }
@@ -51,7 +48,6 @@ class AuthFirebaseConnection extends FireBaseConnection {
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.code);
     } catch (e) {
-      logger.e(e);
       return DataFailed(e.toString());
     }
   }

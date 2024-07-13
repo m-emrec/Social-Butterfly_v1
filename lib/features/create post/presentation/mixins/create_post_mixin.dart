@@ -22,6 +22,15 @@ mixin CreatePostMixin on State<CreatePostPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    headerController.dispose();
+    contentController.dispose();
+    imagePathController.dispose();
+    CreatePostInjectionContainer().dispose();
+  }
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? headerValidator(String? val) {

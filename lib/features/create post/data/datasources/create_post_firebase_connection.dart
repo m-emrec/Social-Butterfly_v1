@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
+
 import '../../../../core/resources/data_state.dart';
 import '../../../../core/utils/models/post_model.dart';
 
@@ -8,7 +10,10 @@ import '../../../../core/resources/fire_store_connection.dart';
 class CreatePostFirebaseConnection extends FireBaseConnection {
   Future<DataState> createPost(PostModel post) async {
     try {
+      /// try to get imageUrl
       final String? imageUrl = await getImageUrl(post.imageUrl);
+
+      /// copy the post with the rest of the parameters
       post = post.copyWith(
         imageUrl: imageUrl,
         commentCount: 0,
@@ -18,6 +23,7 @@ class CreatePostFirebaseConnection extends FireBaseConnection {
       );
       Map<String, dynamic> data = post.toMap();
 
+      /// Create post on Firestore
       await firestore
           .collection(PostCollectionKeys.Posts.name)
           .add(data)
@@ -28,7 +34,19 @@ class CreatePostFirebaseConnection extends FireBaseConnection {
     }
   }
 
+  /// This function the gets the url of uploaded image from Database
   Future<String?> getImageUrl(String? imagePath) async {
+    try {
+      final snapshot = await uploadImageToDatabase(imagePath);
+      final String? imagedUrl = await snapshot?.ref.getDownloadURL();
+      return imagedUrl;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// This function uploads the given image to database
+  Future<TaskSnapshot?> uploadImageToDatabase(String? imagePath) async {
     try {
       File? image = File(imagePath ?? "");
 
@@ -37,8 +55,7 @@ class CreatePostFirebaseConnection extends FireBaseConnection {
           .child('users/$uid/images/${DateTime.now().toIso8601String()}.jpg');
       final uploadTask = ref.putFile(image);
       final snapshot = await uploadTask.whenComplete(() {});
-      final String imagedUrl = await snapshot.ref.getDownloadURL();
-      return imagedUrl;
+      return snapshot;
     } catch (e) {
       return null;
     }

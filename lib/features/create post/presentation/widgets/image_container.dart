@@ -26,8 +26,6 @@ class _ImageContainerState extends State<ImageContainer> {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
         widget.imagePath.text = pickedFile.path;
-      } else {
-        print('No image selected.');
       }
     });
   }

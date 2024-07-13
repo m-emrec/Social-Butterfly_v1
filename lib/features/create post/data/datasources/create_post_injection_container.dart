@@ -8,9 +8,11 @@ import 'create_post_firebase_connection.dart';
 
 class CreatePostInjectionContainer extends InjectionContainer {
   @override
-  Future<void> dispose() {
-    // TODO: implement dispose
-    throw UnimplementedError();
+  Future<void> dispose() async {
+    unRegister(CreatePostFirebaseConnection);
+    unRegister(CreatePostRepo);
+    unRegister(CreatePostUsecase);
+    unRegister(CreatePostBloc);
   }
 
   @override

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:social_butterfly/core/utils/mixins/loading_indicator_mixin.dart';
-import 'package:social_butterfly/core/utils/widgets/custom_snack_bar.dart';
-import 'package:social_butterfly/features/create%20post/presentation/mixins/create_post_mixin.dart';
-import 'package:social_butterfly/features/home/presentation/pages/home_page.dart';
 
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/utils/mixins/loading_indicator_mixin.dart';
 import '../../../../core/utils/widgets/buttons.dart';
 import '../../../../core/utils/widgets/custom_form_field.dart';
+import '../../../../core/utils/widgets/custom_snack_bar.dart';
+import '../../../home/presentation/pages/home_page.dart';
 import '../bloc/create_post_bloc.dart';
+import '../mixins/create_post_mixin.dart';
 import '../widgets/image_container.dart';
 
 class CreatePostPage extends StatefulWidget {
