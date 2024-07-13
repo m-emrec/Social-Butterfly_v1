@@ -8,14 +8,6 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
-      systemNavigationBarColor: AppColors.backgroundColor,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

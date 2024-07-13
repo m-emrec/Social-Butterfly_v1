@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppPaddings {
   ///4
-  static double xsmallPadding = 4.0;
+  static double xxsmallPadding = 4.0;
+
+  ///12
+  static double xsmallPadding = 12.0;
 
   ///8
   static double smallPadding = 8.0;

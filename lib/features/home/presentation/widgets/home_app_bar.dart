@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/enums/asset_enums.dart';
+import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../create%20post/presentation/pages/create_post_page.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
   });
+
+  void _onCreatePostPressed(BuildContext context) {
+    context.pushNamed(CreatePostPage.routeName);
+  }
 
   final String socialText = "Social ";
   final String butterflyText = "Butterfly";
@@ -17,11 +23,15 @@ class HomeAppBar extends StatelessWidget {
       title: title(context),
       leading: Image.asset(AssetsEnum.appLogoIcon.path),
       actions: [
-        IconButton.filled(
-          onPressed: () {},
-          icon: Icon(
-            Icons.add,
-            color: AppColors.backgroundColor,
+        // Create new post button.
+        Padding(
+          padding: EdgeInsets.only(right: AppPaddings.smallPadding),
+          child: IconButton.filled(
+            onPressed: () => _onCreatePostPressed(context),
+            icon: Icon(
+              Icons.add,
+              color: AppColors.backgroundColor,
+            ),
           ),
         )
       ],
