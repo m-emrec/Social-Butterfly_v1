@@ -24,8 +24,7 @@ class CreatePostFirebaseConnection extends FireBaseConnection {
       Map<String, dynamic> data = post.toMap();
 
       /// Create post on Firestore
-      await firestore
-          .collection(PostCollectionKeys.Posts.name)
+      await postsCollection()
           .add(data)
           .then((ref) => ref.update(post.copyWith(id: ref.id).toMap()));
       return DataSuccess(null);

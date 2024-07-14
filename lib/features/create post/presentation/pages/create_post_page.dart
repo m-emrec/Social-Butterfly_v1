@@ -66,7 +66,10 @@ class _CreatePostPageState extends State<CreatePostPage>
           ),
         ),
         appBar: AppBar(
-          title: Text(pageTitle),
+          title: Text(
+            pageTitle,
+            style: context.textTheme.titleLarge,
+          ),
         ),
         body: Padding(
           padding: AppPaddings.pageHPadding,

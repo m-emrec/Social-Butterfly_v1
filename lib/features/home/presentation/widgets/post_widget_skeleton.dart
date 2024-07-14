@@ -62,7 +62,7 @@ class PostWidgetSkeleton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomIconButton(
-                  onPressed: () {},
+                  onPressed: () => {},
                   icon: const Icon(Icons.abc),
                 ),
                 Gap(AppPaddings.mediumPadding),

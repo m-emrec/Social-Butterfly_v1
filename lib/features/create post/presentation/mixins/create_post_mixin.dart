@@ -34,7 +34,6 @@ mixin CreatePostMixin on State<CreatePostPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? headerValidator(String? val) {
-    logger.w(val);
     if (val != null) {
       if (val.length > 3) {
         return null;

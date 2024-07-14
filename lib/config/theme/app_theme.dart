@@ -7,6 +7,7 @@ class AppTheme {
   final ThemeData _lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.backgroundColor,
+    canvasColor: AppColors.backgroundColor,
     textTheme: textThemes.textTheme,
     primaryColor: AppColors.primaryColor,
 
@@ -118,5 +119,9 @@ class AppColors {
 }
 
 class _AppTextThemes {
-  final TextTheme textTheme = TextTheme();
+  final TextTheme textTheme = TextTheme(
+    titleLarge: TextStyle(
+      color: AppColors.darkTextColor,
+    ),
+  );
 }
