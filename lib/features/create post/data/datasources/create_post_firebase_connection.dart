@@ -60,7 +60,3 @@ class CreatePostFirebaseConnection extends FireBaseConnection {
     }
   }
 }
-
-enum PostCollectionKeys {
-  Posts,
-}

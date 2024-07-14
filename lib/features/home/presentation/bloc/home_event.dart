@@ -7,8 +7,8 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeFetchDataEvent extends HomeEvent {
-  const HomeFetchDataEvent();
+class HomeFetchPostListEvent extends HomeEvent {
+  const HomeFetchPostListEvent();
 }
 
 class HomeUpdatePostListEvent extends HomeEvent {

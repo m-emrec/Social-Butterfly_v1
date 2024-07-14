@@ -9,14 +9,12 @@ abstract class HomeState extends Equatable {
 
 class HomeInitial extends HomeState {}
 
-abstract class HomeActionState extends HomeState {}
-
 class HomeLoadingState extends HomeState {}
 
 class HomeSuccessState extends HomeState {
-  final List<PostModel> postModel;
+  final List<PostModel> listOfPostModel;
 
-  const HomeSuccessState({required this.postModel});
+  const HomeSuccessState({required this.listOfPostModel});
 }
 
 class HomeFailState extends HomeState {
@@ -25,12 +23,12 @@ class HomeFailState extends HomeState {
   const HomeFailState(this.errmsg);
 }
 
-class HomeUpdateListState extends HomeActionState {
-  final List<PostModel> postModel;
+class HomeUpdateListState extends HomeState {
+  final List<PostModel> listOfPostModel;
 
-  HomeUpdateListState(this.postModel);
+  const HomeUpdateListState(this.listOfPostModel);
 }
 
-class HomeEndOFListState extends HomeActionState {
-  HomeEndOFListState();
+class HomeEndOFListState extends HomeState {
+  const HomeEndOFListState();
 }

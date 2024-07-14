@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/rendering.dart';
-import 'package:social_butterfly/core/resources/data_state.dart';
-import 'package:social_butterfly/core/utils/models/post_model.dart';
-import 'package:social_butterfly/features/home/domain/usecases/update_list_of_post_data_usecase.dart';
-import 'package:social_butterfly/logger.dart';
+
+import '../../../../core/resources/data_state.dart';
+import '../../../../core/utils/models/post_model.dart';
 import '../../domain/usecases/fetch_post_data_usecase.dart';
+import '../../domain/usecases/update_list_of_post_data_usecase.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -19,18 +18,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._fetchPostDataUsecase, this._updateListOfPostDataUsecase)
       : super(HomeInitial()) {
     on<HomeEvent>((event, emit) {});
-    on<HomeFetchDataEvent>(onHomeFetchDataEvent);
+    on<HomeFetchPostListEvent>(onHomeFetchPostListEvent);
     on<HomeUpdatePostListEvent>(onHomeUpdatePostListEvent);
   }
 
-  FutureOr<void> onHomeFetchDataEvent(
-      HomeFetchDataEvent event, Emitter<HomeState> emit) async {
+  FutureOr<void> onHomeFetchPostListEvent(
+      HomeFetchPostListEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     final DataState dataState = await _fetchPostDataUsecase.call(null);
     if (dataState is DataSuccess) {
-      emit(HomeSuccessState(postModel: dataState.data));
+      emit(HomeSuccessState(listOfPostModel: dataState.data));
     } else {
-      logger.e(dataState.exception);
       emit(HomeFailState(dataState.exception));
     }
   }
@@ -41,13 +39,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final DataState dataState =
         await _updateListOfPostDataUsecase.call(event.postList);
     if (dataState is DataSuccess) {
+      /// if dataState.data is null that means there is no more post to see.
       if (dataState.data == null) {
-        emit(HomeEndOFListState());
+        emit(const HomeEndOFListState());
       } else {
         emit(HomeUpdateListState(dataState.data));
       }
     } else {
-      logger.e(dataState.exception);
       emit(HomeFailState(dataState.exception));
     }
   }

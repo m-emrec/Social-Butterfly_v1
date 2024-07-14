@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../../features/create post/data/datasources/create_post_firebase_connection.dart';
+import '../constants/enums/firebase_keys_enum.dart';
 
 abstract class FireBaseConnection {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -14,6 +14,6 @@ abstract class FireBaseConnection {
   String? get uid => firebaseAuth.currentUser?.uid;
 
   CollectionReference<Map<String, dynamic>> postsCollection() {
-    return firestore.collection(PostCollectionKeys.Posts.name);
+    return firestore.collection(FirebaseKeysEnum.Posts.name);
   }
 }

@@ -21,5 +21,5 @@ class AppPaddings {
 
   /// Horizontal padding
   static EdgeInsets pageHPadding =
-      EdgeInsets.symmetric(horizontal: mediumPadding);
+      EdgeInsets.symmetric(horizontal: smallPadding);
 }
