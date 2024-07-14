@@ -1,3 +1,5 @@
+import 'package:social_butterfly/features/home/domain/usecases/update_list_of_post_data_usecase.dart';
+
 import '../../../../core/resources/injection_container.dart';
 import '../../domain/repositories/home_repo.dart';
 import '../../domain/usecases/fetch_post_data_usecase.dart';
@@ -20,8 +22,8 @@ class HomeInjectionContainer extends InjectionContainer {
     register<HomeFirebaseConnection>(HomeFirebaseConnection());
     register<HomeRepo>(HomeRepoImpl(firebaseConnection: sl()));
 
+    register<UpdateListOfPostDataUsecase>(UpdateListOfPostDataUsecase(sl()));
     register<FetchPostDataUsecase>(FetchPostDataUsecase(homeRepo: sl()));
-
-    sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
+    register<HomeBloc>(HomeBloc(sl(), sl()));
   }
 }

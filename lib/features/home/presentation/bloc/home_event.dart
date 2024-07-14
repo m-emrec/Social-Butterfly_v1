@@ -8,7 +8,10 @@ abstract class HomeEvent extends Equatable {
 }
 
 class HomeFetchDataEvent extends HomeEvent {
-  final int index;
+  const HomeFetchDataEvent();
+}
 
-  const HomeFetchDataEvent(this.index);
+class HomeUpdatePostListEvent extends HomeEvent {
+  final List<PostModel> postList;
+  const HomeUpdatePostListEvent(this.postList);
 }

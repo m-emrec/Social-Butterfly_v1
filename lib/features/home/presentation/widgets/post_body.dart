@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:social_butterfly/core/utils/models/post_model.dart';
+import 'package:social_butterfly/logger.dart';
 import '../../../../core/extensions/context_extension.dart';
 
 import '../../../../core/constants/paddings.dart';
@@ -14,14 +16,15 @@ class PostBody extends StatelessWidget {
 
   final String? content;
   final String? imageUrl;
-
+  final PostModel postModel;
   const PostBody(
       {super.key,
       this.publishedBy,
       this.header,
       this.createdDate,
       this.content,
-      this.imageUrl});
+      this.imageUrl,
+      required this.postModel});
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +38,25 @@ class PostBody extends StatelessWidget {
             children: [
               // User name
               Text(
-                publishedBy ?? "",
+                postModel.publishedBy ?? "",
                 style: context.textTheme.titleSmall,
               ),
               // date
               Text(
-                createdDate.toString(),
+                postModel.createdDate.toString(),
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ],
           ),
           // Image
           Visibility(
-            visible: imageUrl != "",
+            visible: postModel.imageUrl != "",
             child: AspectRatio(
               aspectRatio: 16 / 12,
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 child: Image.network(
-                  imageUrl ?? "",
+                  postModel.imageUrl ?? "",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -62,13 +65,13 @@ class PostBody extends StatelessWidget {
 
           // Header
           Text(
-            header ?? "",
+            postModel.header ?? "",
             style: context.textTheme.titleMedium,
           ),
 
           // Content
           Text(
-            content ?? "",
+            postModel.content ?? "",
             style: context.textTheme.bodySmall,
           ),
           Gap(AppPaddings.xxsmallPadding),

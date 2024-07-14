@@ -6,30 +6,38 @@ import '../../../../core/utils/models/post_model.dart';
 import '../../../../core/resources/fire_store_connection.dart';
 
 class HomeFirebaseConnection extends FireBaseConnection {
-  Future<DataState<PostModel>> fetchPostData(int index) async {
+  Future<DataState<List<PostModel>>> fetchPostData(
+      List<PostModel> postList) async {
+    final List<PostModel> _postList = [];
     try {
-      final QuerySnapshot<Map<String, dynamic>> querry = await postsCollection()
+      final QuerySnapshot<Map<String, dynamic>> query = await postsCollection()
           .orderBy("createdDate", descending: true)
           .get();
 
-      List<QueryDocumentSnapshot> listOfPosts = querry.docs;
-      Map<String, dynamic> doc =
-          listOfPosts[index].data() as Map<String, dynamic>;
+      Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
+          query.docs.getRange(postList.length, postList.length + 3);
 
-      PostModel postModel = PostModel.fromMap(doc);
-      final String publishedBy = await firestore
-          .collection("Users")
-          .doc(postModel.publishedBy)
-          .get()
-          .then(
-              (DocumentSnapshot<Map<String, dynamic>> doc) => doc["userName"]);
-      postModel = postModel.copyWith(publishedBy: publishedBy);
+      for (var doc in listOfPostDocs) {
+        String publishedBy = await findUserName(doc["publishedBy"]);
+        PostModel model =
+            PostModel.fromMap(doc.data()).copyWith(publishedBy: publishedBy);
+        _postList.add(model);
+      }
 
-      return DataSuccess(postModel);
-    } on RangeError catch (_) {
+      return DataSuccess(_postList);
+    } on RangeError catch (e) {
       return DataSuccess(null);
     } catch (e) {
       return DataFailed(e.toString());
     }
+  }
+
+  Future<String> findUserName(String? uid) async {
+    final String publishedBy = await firestore
+        .collection("Users")
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> doc) => doc["userName"]);
+    return publishedBy;
   }
 }

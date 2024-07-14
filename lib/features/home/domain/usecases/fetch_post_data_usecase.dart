@@ -4,12 +4,12 @@ import '../repositories/home_repo.dart';
 
 import '../../../../core/utils/models/post_model.dart';
 
-class FetchPostDataUsecase extends UseCase<DataState<PostModel>, int> {
+class FetchPostDataUsecase extends UseCase<DataState<List<PostModel>>, void> {
   final HomeRepo _homeRepo;
 
   FetchPostDataUsecase({required HomeRepo homeRepo}) : _homeRepo = homeRepo;
   @override
-  Future<DataState<PostModel>> call(int params) async {
-    return await _homeRepo.fetchPostData(params);
+  Future<DataState<List<PostModel>>> call(void params) async {
+    return await _homeRepo.fetchListOfPostData();
   }
 }

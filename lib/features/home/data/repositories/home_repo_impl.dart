@@ -9,9 +9,17 @@ class HomeRepoImpl implements HomeRepo {
   HomeRepoImpl({required HomeFirebaseConnection firebaseConnection})
       : _firebaseConnection = firebaseConnection;
   @override
-  Future<DataState<PostModel>> fetchPostData(int index) async {
-    final DataState<PostModel> dataState =
-        await _firebaseConnection.fetchPostData(index);
+  Future<DataState<List<PostModel>>> fetchListOfPostData() async {
+    final DataState<List<PostModel>> dataState =
+        await _firebaseConnection.fetchPostData([]);
+    return dataState;
+  }
+
+  @override
+  Future<DataState<List<PostModel>>> updateListOfPostData(
+      List<PostModel> postList) async {
+    final DataState<List<PostModel>> dataState =
+        await _firebaseConnection.fetchPostData(postList);
     return dataState;
   }
 }
