@@ -10,10 +10,12 @@ abstract class AuthEvent extends Equatable {
 class AuthSignUpWithEmailEvent extends AuthEvent {
   final String email;
   final String password;
+  final String userName;
 
   const AuthSignUpWithEmailEvent({
     required this.email,
     required this.password,
+    required this.userName,
   });
 }
 

@@ -10,6 +10,8 @@ class SignUpWithEmailUsecase extends UseCase<DataState, CredentialsEntity> {
   @override
   Future<DataState> call(CredentialsEntity params) async {
     return await _authRepo.signUpWithEmail(
-        email: params.email, password: params.password);
+        email: params.email,
+        password: params.password,
+        userName: params.userName ?? "");
   }
 }

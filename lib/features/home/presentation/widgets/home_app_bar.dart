@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/theme/app_theme.dart';
@@ -22,7 +23,9 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title(context),
-      leading: Image.asset(AssetsEnum.appLogoIcon.path),
+      leading: GestureDetector(
+          onTap: () => FirebaseAuth.instance.signOut(),
+          child: Image.asset(AssetsEnum.appLogoIcon.path)),
       actions: [
         // Create new post button.
         Padding(

@@ -2,17 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:social_butterfly/config/theme/app_theme.dart';
-import 'package:social_butterfly/core/constants/enums/asset_enums.dart';
-import 'package:social_butterfly/core/extensions/context_extension.dart';
-import 'package:social_butterfly/core/utils/mixins/loading_indicator_mixin.dart';
-import 'package:social_butterfly/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:social_butterfly/features/auth/presentation/pages/forgot_password_page.dart';
 
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/enums/asset_enums.dart';
 import '../../../../core/constants/paddings.dart';
-import '../../../../core/extensions/image_path_extension.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/utils/mixins/loading_indicator_mixin.dart';
 import '../../../../core/utils/widgets/custom_form_field.dart';
 import '../../../../core/utils/widgets/custom_snack_bar.dart';
+import '../bloc/auth_bloc.dart';
+import '../pages/forgot_password_page.dart';
 
 class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
   const BaseAuthPage({
@@ -28,6 +27,9 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
     this.emailValidator,
     this.passwordValidator,
     required this.authBloc,
+    this.nameController,
+    this.showNameField = false,
+    this.nameValidator,
   });
   final String title;
   final GlobalKey<FormState> formKey;
@@ -38,10 +40,13 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final TextEditingController? nameController;
 
   final String? Function(String?)? emailValidator;
   final String? Function(String?)? passwordValidator;
+  final String? Function(String?)? nameValidator;
 
+  final bool showNameField;
   final AuthBloc authBloc;
 
   Widget get divider => const Row(
@@ -56,27 +61,7 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       bloc: authBloc,
-      listener: (context, state) {
-        switch (state) {
-          case AuthSuccessState():
-            disposeLoadingIndicator(context);
-            context.pushReplacementNamed("/");
-            break;
-          case AuthFailState():
-            disposeLoadingIndicator(context);
-            context.showSnack(
-              ErrorSnack(
-                context,
-                text: state.errmsg,
-              ),
-            );
-            break;
-          case AuthLoadingState():
-            showLoadingIndicator(context);
-            break;
-          default:
-        }
-      },
+      listener: blocListener,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -102,7 +87,17 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
                   key: formKey,
                   child: Column(
                     children: [
-                      /// email fields
+                      Visibility(
+                        visible: showNameField,
+                        child: NormalTextFormField(
+                          controller: nameController,
+                          label: "User name",
+                          validator: nameValidator,
+                        ),
+                      ),
+                      Gap(AppPaddings.mediumPadding),
+
+                      /// email field
                       EmailField(
                         controller: emailController,
                         validator: emailValidator,
@@ -159,5 +154,27 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
         ),
       ),
     );
+  }
+
+  void blocListener(BuildContext context, state) {
+    switch (state) {
+      case AuthSuccessState():
+        disposeLoadingIndicator(context);
+        context.pushReplacementNamed("/");
+        break;
+      case AuthFailState():
+        disposeLoadingIndicator(context);
+        context.showSnack(
+          ErrorSnack(
+            context,
+            text: state.errmsg,
+          ),
+        );
+        break;
+      case AuthLoadingState():
+        showLoadingIndicator(context);
+        break;
+      default:
+    }
   }
 }

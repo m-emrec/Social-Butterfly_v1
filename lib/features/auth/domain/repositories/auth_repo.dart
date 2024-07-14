@@ -11,6 +11,7 @@ abstract class AuthRepo {
   Future<DataState> signUpWithEmail({
     required String email,
     required String password,
+    required String userName,
   });
 
   //Forgot password

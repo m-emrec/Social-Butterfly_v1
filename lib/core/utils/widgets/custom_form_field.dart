@@ -135,15 +135,13 @@ class NormalTextFormField extends CustomFormField {
   NormalTextFormField({
     super.key,
     super.controller,
-    super.label,
+    super.label = "Header",
     super.hintText,
     super.keyboardType = TextInputType.emailAddress,
     super.textInputAction = TextInputAction.next,
     super.validator,
   });
 
-  @override
-  String get label => "Header";
   @override
   TextInputType? get keyboardType => TextInputType.text;
 }

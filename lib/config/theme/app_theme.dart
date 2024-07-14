@@ -93,8 +93,8 @@ class AppTheme {
 
   static AppBarTheme get _appBarTheme => AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
           systemNavigationBarColor: AppColors.backgroundColor,
+          statusBarColor: AppColors.backgroundColor,
           statusBarIconBrightness: Brightness.dark,
         ),
         color: Colors.transparent,

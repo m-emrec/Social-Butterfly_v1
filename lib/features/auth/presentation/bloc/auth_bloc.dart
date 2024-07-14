@@ -58,8 +58,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> onAuthSignUpWithEmailEvent(
       AuthSignUpWithEmailEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoadingState());
-    CredentialsModel credentials =
-        CredentialsModel(email: event.email, password: event.password);
+    CredentialsModel credentials = CredentialsModel(
+        email: event.email, password: event.password, userName: event.userName);
     final DataState dataState = await _signUpWithEmailUsecase.call(credentials);
     checkDataState(dataState, emit);
   }

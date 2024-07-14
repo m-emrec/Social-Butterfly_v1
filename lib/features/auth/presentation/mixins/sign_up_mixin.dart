@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -16,13 +15,19 @@ mixin SignUpMixin on State<SignUpPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  final TextEditingController nameController = TextEditingController();
   late AuthBloc authBloc;
+
+  String? nameValidator(String? p0) =>
+      p0!.length > 3 ? null : "Your user name must be longer than 3 char.";
 
   onSignUpButtonPressed() {
     if (formKey.currentState!.validate()) {
       authBloc.add(AuthSignUpWithEmailEvent(
-          email: emailController.text, password: passwordController.text));
+        email: emailController.text,
+        password: passwordController.text,
+        userName: nameController.text,
+      ));
     }
   }
 

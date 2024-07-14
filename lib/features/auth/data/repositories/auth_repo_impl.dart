@@ -32,9 +32,12 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<DataState> signUpWithEmail(
-      {required String email, required String password}) async {
+  Future<DataState> signUpWithEmail({
+    required String email,
+    required String password,
+    required String userName,
+  }) async {
     return await _authFirebaseConnection.signUpWithEmail(
-        email: email, password: password);
+        email: email, password: password, userName: userName);
   }
 }
