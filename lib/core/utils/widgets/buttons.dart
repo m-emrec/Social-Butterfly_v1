@@ -53,9 +53,12 @@ class CustomIconButton extends StatelessWidget {
   final Widget icon;
 
   final void Function()? onPressed;
-
+  final bool isFilled;
   const CustomIconButton(
-      {super.key, required this.icon, required this.onPressed});
+      {super.key,
+      required this.icon,
+      required this.onPressed,
+      this.isFilled = true});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,7 @@ class CustomIconButton extends StatelessWidget {
         padding: EdgeInsets.all(
           AppPaddings.xsmallPadding,
         ),
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: isFilled ? AppColors.primaryColor : Colors.transparent,
         foregroundColor: AppColors.backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: AppBorderRadius.mediumBorderRadius,

@@ -4,6 +4,7 @@ enum AssetsEnum {
   likeTapped("${_rootIconPath}like_tapped.png"),
   locked("${_rootIconPath}locked.png"),
   openLock("${_rootIconPath}open_lock.png"),
+  comment("${_rootIconPath}comment.png"),
   authBackgroundImage("${_rootImagePath}auth_bg_image.png"),
   loadingAnimation("${_rootAnimationPath}loading_indicator.riv"),
   appLogoIcon("${_rootIconPath}logo.png"),

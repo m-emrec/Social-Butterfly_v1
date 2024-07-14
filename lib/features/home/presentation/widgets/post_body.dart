@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/constants/enums/asset_enums.dart';
 
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -22,7 +23,7 @@ class PostBody extends StatelessWidget {
         children: [
           _TopRow(postModel: postModel),
           // Image
-          _ImageWidget(isPostWithImage: _isPostWithImage, postModel: postModel),
+          ImageWidget(isPostWithImage: _isPostWithImage, postModel: postModel),
           // Header
           Text(
             postModel.header ?? "",
@@ -35,7 +36,10 @@ class PostBody extends StatelessWidget {
             style: context.textTheme.bodySmall,
           ),
           Gap(AppPaddings.xxsmallPadding),
-          const _ButtonRow(),
+          // _ButtonRow(
+          //   commentCount: postModel.commentCount,
+          //   likeCount: postModel.likeCount,
+          // ),
         ],
       ),
     );
@@ -43,29 +47,55 @@ class PostBody extends StatelessWidget {
 }
 
 class _ButtonRow extends StatelessWidget {
-  const _ButtonRow();
+  final int? commentCount;
+  final int? likeCount;
+  const _ButtonRow({
+    this.commentCount = 0,
+    this.likeCount = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        CustomIconButton(
-          onPressed: () => {},
-          icon: const Icon(Icons.abc),
+        Column(
+          children: [
+            CustomIconButton(
+              isFilled: false,
+              onPressed: () => {},
+              icon: Image.asset(
+                AssetsEnum.like.path,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Text(
+              likeCount.toString(),
+              style: context.textTheme.labelSmall,
+            )
+          ],
         ),
         Gap(AppPaddings.mediumPadding),
-        CustomIconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.abc),
+        Column(
+          children: [
+            CustomIconButton(
+              isFilled: false,
+              onPressed: () {},
+              icon: Image.asset(
+                AssetsEnum.comment.path,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Text(commentCount.toString(), style: context.textTheme.labelSmall)
+          ],
         )
       ],
     );
   }
 }
 
-class _ImageWidget extends StatelessWidget {
-  const _ImageWidget({
+class ImageWidget extends StatelessWidget {
+  const ImageWidget({
     required bool isPostWithImage,
     required this.postModel,
   }) : _isPostWithImage = isPostWithImage;
