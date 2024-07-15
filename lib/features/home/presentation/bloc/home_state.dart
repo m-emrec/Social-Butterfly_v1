@@ -24,7 +24,7 @@ class HomeFailState extends HomeState {
 }
 
 class HomeUpdateListState extends HomeState {
-  final List<PostModel> listOfPostModel;
+  final PostModel listOfPostModel;
 
   const HomeUpdateListState(this.listOfPostModel);
 }

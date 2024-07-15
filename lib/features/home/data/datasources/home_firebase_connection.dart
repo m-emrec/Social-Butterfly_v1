@@ -10,22 +10,43 @@ import '../../../../core/utils/models/post_model.dart';
 class HomeFirebaseConnection extends FireBaseConnection {
   Future<DataState<List<PostModel>>> fetchPostData(
       List<PostModel> fetchedPostList) async {
-    // logger.i(fetchedPostList);
     List<PostModel> postList = [];
     try {
       final QuerySnapshot<Map<String, dynamic>> query =
           await _getOrderedQuery();
 
-      QueryDocumentSnapshot<Map<String, dynamic>> postDoc =
-          _getRangeListOfDocs(index: fetchedPostList.length, query: query);
+      Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfFirst3Post =
+          _getRangeListOfDocs(query: query);
 
-      postList = await _createPostList(postList, postDoc);
+      postList = await _createPostList(postList, listOfFirst3Post);
 
       return DataSuccess(postList);
     } on RangeError {
       return DataSuccess(null);
     } catch (e) {
       return DataFailed(e.toString());
+    }
+  }
+
+  Future<DataState<PostModel>> updatePostList(List<PostModel> postList) async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> query =
+          await _getOrderedQuery();
+      final QueryDocumentSnapshot<Map<String, dynamic>> newPost =
+          query.docs[postList.length];
+
+      final String publishedBy =
+          await _findUserName(newPost[FirebaseKeysEnum.publishedBy.name]);
+
+      final PostModel model =
+          PostModel.fromMap(newPost.data()).copyWith(publishedBy: publishedBy);
+
+      return DataSuccess(model);
+    } on RangeError {
+      return DataSuccess(null);
+    } catch (e) {
+      logger.e(e);
+      return DataFailed(e);
     }
   }
 
@@ -36,25 +57,27 @@ class HomeFirebaseConnection extends FireBaseConnection {
     return query;
   }
 
-  QueryDocumentSnapshot<Map<String, dynamic>> _getRangeListOfDocs({
-    required int index,
+  Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> _getRangeListOfDocs({
     required QuerySnapshot<Map<String, dynamic>> query,
   }) {
-    logger.i(index);
-    List<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
-        query.docs;
+    Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
+        query.docs.getRange(0, 3);
 
-    return listOfPostDocs[index];
+    return listOfPostDocs;
   }
 
-  Future<List<PostModel>> _createPostList(List<PostModel> list,
-      QueryDocumentSnapshot<Map<String, dynamic>> postDoc) async {
-    String publishedBy =
-        await _findUserName(postDoc[FirebaseKeysEnum.publishedBy.name]);
-    PostModel model =
-        PostModel.fromMap(postDoc.data()).copyWith(publishedBy: publishedBy);
+  Future<List<PostModel>> _createPostList(
+      List<PostModel> list,
+      Iterable<QueryDocumentSnapshot<Map<String, dynamic>>>
+          listOfFirst3Post) async {
+    for (var doc in listOfFirst3Post) {
+      String publishedBy =
+          await _findUserName(doc[FirebaseKeysEnum.publishedBy.name]);
+      PostModel model =
+          PostModel.fromMap(doc.data()).copyWith(publishedBy: publishedBy);
 
-    list.add(model);
+      list.add(model);
+    }
 
     return list;
   }

@@ -71,12 +71,11 @@ mixin HomePageMixin on State<HomePage> {
     if (state is HomeSuccessState) {
       postList = state.listOfPostModel;
       setState(() {});
-      sleep(Duration(seconds: 3));
       logger.e(postList.length);
     }
     if (state is HomeUpdateListState) {
       setState(() {
-        postList.addAll(state.listOfPostModel);
+        postList.add(state.listOfPostModel);
       });
     }
     if (state is HomeEndOFListState) {

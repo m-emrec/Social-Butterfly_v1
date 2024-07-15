@@ -3,6 +3,5 @@ import '../../../../core/utils/models/post_model.dart';
 
 abstract class HomeRepo {
   Future<DataState<List<PostModel>>> fetchListOfPostData();
-  Future<DataState<List<PostModel>>> updateListOfPostData(
-      List<PostModel> postList);
+  Future<DataState<PostModel>> updateListOfPostData(List<PostModel> postList);
 }

@@ -16,10 +16,10 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<DataState<List<PostModel>>> updateListOfPostData(
+  Future<DataState<PostModel>> updateListOfPostData(
       List<PostModel> postList) async {
-    final DataState<List<PostModel>> dataState =
-        await _firebaseConnection.fetchPostData(postList);
+    final DataState<PostModel> dataState =
+        await _firebaseConnection.updatePostList(postList);
     return dataState;
   }
 }
