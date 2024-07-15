@@ -1,16 +1,49 @@
-# social_butterfly
+# Social Butterfly
 
-A new Flutter project.
+
+
+## Features
+
+- Share images.
+- Share your ideas.
+
+## Technologies Used
+
+### Language
+
+- Flutter
+
+### Backend
+- Firebase Firestore
+- FirebaseAuth
+- Firebase Storage
+
+### State Management
+
+- Bloc
+- GetIt for Dependency Injection 
+
+### Architecture
+
+- Clean Architecture
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with Social Butterfly, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+### 1-Clone the repository:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+git clone https://github.com/m-emrec/Social-Butterfly_v1.git
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2-Navigate to the project directory:
+
+cd Social-Butterfly_v1
+
+### 3-Install dependencies:
+
+flutter pub get
+
+### 4-Run the app:
+
+flutter run
