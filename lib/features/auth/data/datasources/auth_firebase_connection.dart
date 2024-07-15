@@ -61,7 +61,7 @@ class AuthFirebaseConnection extends FireBaseConnection {
   Future<DataState> signInWithGoogle(AuthCredential credential) async {
     try {
       await firebaseAuth.signInWithCredential(credential);
-
+      await saveUserToFireStore(user.user!.uid, user.user!.displayName!);
       return DataSuccess(null);
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.code);
