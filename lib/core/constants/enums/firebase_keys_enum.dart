@@ -3,5 +3,8 @@ enum FirebaseKeysEnum {
   Users,
   userName,
   createdDate,
-  publishedBy,
+  publishedBy;
+
+  /// This enum contains Keys which used on Firebase
+  const FirebaseKeysEnum();
 }

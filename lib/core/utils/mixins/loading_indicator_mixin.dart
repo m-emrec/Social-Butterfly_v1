@@ -10,8 +10,8 @@ mixin LoadingIndicatorMixin {
       context: context,
       builder: (context) => Center(
         child: SizedBox(
-          width: 300,
-          height: 300,
+          width: 150,
+          height: 150,
           child: RiveAnimation.asset(
             AssetsEnum.loadingAnimation.path,
           ),

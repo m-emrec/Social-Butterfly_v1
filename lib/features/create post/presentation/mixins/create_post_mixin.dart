@@ -34,7 +34,7 @@ mixin CreatePostMixin on State<CreatePostPage> {
 
   String? headerValidator(String? val) {
     if (val != null) {
-      if (val.length > 3) {
+      if (val.length >= 3) {
         return null;
       }
     }

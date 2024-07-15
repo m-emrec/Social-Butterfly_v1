@@ -17,13 +17,15 @@ class CreatePostInjectionContainer extends InjectionContainer {
 
   @override
   Future<void> initialize() async {
-    register<CreatePostFirebaseConnection>(CreatePostFirebaseConnection());
+    try {
+      register<CreatePostFirebaseConnection>(CreatePostFirebaseConnection());
 
-    register<CreatePostRepo>(
-        CreatePostRepoImpl(createPostFirebaseConnection: sl()));
+      register<CreatePostRepo>(
+          CreatePostRepoImpl(createPostFirebaseConnection: sl()));
 
-    register<CreatePostUsecase>(CreatePostUsecase(createPostRepo: sl()));
+      register<CreatePostUsecase>(CreatePostUsecase(createPostRepo: sl()));
 
-    register<CreatePostBloc>(CreatePostBloc(sl()));
+      register<CreatePostBloc>(CreatePostBloc(sl()));
+    } catch (e) {}
   }
 }

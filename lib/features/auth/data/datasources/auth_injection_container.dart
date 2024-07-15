@@ -11,13 +11,7 @@ import 'auth_firebase_connection.dart';
 class AuthInjectionContainer extends InjectionContainer {
   @override
   Future<void> dispose() async {
-    unRegister(AuthFirebaseConnection);
-    unRegister(AuthRepo);
-    unRegister(SignUpWithEmailUsecase);
-    unRegister(ForgotPasswordUsecase);
-    unRegister(SignInWithGoogle);
-    unRegister(SignInWithEmailUsecase);
-    unRegister(AuthBloc);
+    sl.reset();
   }
 
   @override

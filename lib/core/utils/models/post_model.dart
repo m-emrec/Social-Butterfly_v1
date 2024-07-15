@@ -71,40 +71,4 @@ class PostModel {
           map['commentCount'] != null ? map['commentCount'] as int : null,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory PostModel.fromJson(String source) =>
-      PostModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'PostModel(id: $id, publishedBy: $publishedBy, header: $header, content: $content, imageUrl: $imageUrl, createdDate: $createdDate, likeCount: $likeCount, commentCount: $commentCount)';
-  }
-
-  @override
-  bool operator ==(covariant PostModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.publishedBy == publishedBy &&
-        other.header == header &&
-        other.content == content &&
-        other.imageUrl == imageUrl &&
-        other.createdDate == createdDate &&
-        other.likeCount == likeCount &&
-        other.commentCount == commentCount;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        publishedBy.hashCode ^
-        header.hashCode ^
-        content.hashCode ^
-        imageUrl.hashCode ^
-        createdDate.hashCode ^
-        likeCount.hashCode ^
-        commentCount.hashCode;
-  }
 }

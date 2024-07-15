@@ -23,6 +23,7 @@ class _AuthManagerState extends State<AuthManager> {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+        /// If user authenticated return [HomePage]
         if (snapshot.hasData) {
           return const HomePage();
 

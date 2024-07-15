@@ -70,6 +70,7 @@ class AuthFirebaseConnection extends FireBaseConnection {
     }
   }
 
+  /// This function used to save User name to the [Firestore]
   Future<void> saveUserToFireStore(String uid, String userName) async {
     await firestore.collection(FirebaseKeysEnum.Users.name).doc(uid).set({
       FirebaseKeysEnum.userName.name: userName,

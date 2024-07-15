@@ -64,7 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     checkDataState(dataState, emit);
   }
 
-  /// this functions receives a [DataState] and check if it is [DataSuccess] or [DataFail]
+  /// this functions receives a [DataState] and check if it is [DataSuccess] or [DataFailed]
   /// if [DataSuccess] it returns [AuthSuccessState]
   /// if not [DataSuccess] it returns [AuthFailState] and the error.
   checkDataState(DataState dataState, Emitter<AuthState> emit) async {

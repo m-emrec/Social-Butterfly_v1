@@ -9,6 +9,9 @@ class ExpandedElevatedButton extends StatelessWidget {
 
   final Widget child;
 
+  /// Return an [ElevatedButton] wrapped in [Expanded] widget.
+  /// If you want to make this button expand horizontally , wrapt it with [Row]
+  /// ATTENTION : Do not use this widget without wrapping it with a [Row] or [Column]
   const ExpandedElevatedButton(
       {super.key, this.onPressed, required this.child});
 
@@ -20,8 +23,6 @@ class ExpandedElevatedButton extends StatelessWidget {
   }
 }
 
-/// Elevated
-
 /// Outlined
 class ExpandedOutlinedIconButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -29,6 +30,9 @@ class ExpandedOutlinedIconButton extends StatelessWidget {
   final Widget label;
   final Widget? icon;
 
+  /// Return an [OutlinedButton.icon] wrapped in [Expanded] widget.
+  /// If you want to make this button expand horizontally , wrapt it with [Row]
+  /// ATTENTION : Do not use this widget without wrapping it with a [Row] or [Column]
   const ExpandedOutlinedIconButton({
     super.key,
     this.onPressed,
@@ -78,5 +82,3 @@ class CustomIconButton extends StatelessWidget {
     );
   }
 }
-
-/// Text

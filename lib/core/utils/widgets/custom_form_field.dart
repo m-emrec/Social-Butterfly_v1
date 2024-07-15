@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:social_butterfly/core/constants/enums/asset_enums.dart';
+import '../../constants/enums/asset_enums.dart';
 
-abstract class CustomFormField extends TextFormField {
-  CustomFormField({
+abstract class _CustomFormField extends TextFormField {
+  _CustomFormField({
     super.key,
     super.controller,
     this.label = "",
@@ -57,27 +57,24 @@ abstract class CustomFormField extends TextFormField {
       );
 }
 
-class EmailField extends CustomFormField {
+class EmailField extends _CustomFormField {
   EmailField({
     super.key,
     super.controller,
-    super.label,
-    super.hintText,
+    super.label = "Email",
+    super.hintText = "Enter your email",
     super.keyboardType = TextInputType.emailAddress,
     super.textInputAction = TextInputAction.next,
     super.validator,
   });
-  @override
-  String get label => "Email";
-  @override
-  String? get hintText => "Enter your email";
+
   @override
   TextInputType? get keyboardType => TextInputType.emailAddress;
   @override
   Iterable<String>? get autofillHints => [AutofillHints.email];
 }
 
-class PasswordField extends CustomFormField {
+class PasswordField extends _CustomFormField {
   PasswordField({
     super.key,
     super.controller,
@@ -131,7 +128,7 @@ class PasswordField extends CustomFormField {
       );
 }
 
-class NormalTextFormField extends CustomFormField {
+class NormalTextFormField extends _CustomFormField {
   NormalTextFormField({
     super.key,
     super.controller,
@@ -146,7 +143,7 @@ class NormalTextFormField extends CustomFormField {
   TextInputType? get keyboardType => TextInputType.text;
 }
 
-class NormalTextAreaFormField extends CustomFormField {
+class NormalTextAreaFormField extends _CustomFormField {
   NormalTextAreaFormField({
     super.key,
     super.controller,
@@ -163,6 +160,5 @@ class NormalTextAreaFormField extends CustomFormField {
   @override
   TextInputType? get keyboardType => TextInputType.multiline;
   @override
-  // TODO: implement textInputAction
   TextInputAction? get textInputAction => TextInputAction.newline;
 }

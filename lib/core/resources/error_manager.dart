@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-
 class AppErrorText {
   /// With this class I can manage all error codes in one place.
   AppErrorText();
-
   final Map _errorText = {
     //Firebase Auth
     "The email address is already in use by another account.":
@@ -123,11 +120,10 @@ class AppErrorText {
         return message;
       }
     }
-
-    /// For debug purposes
-    if (_errorText[errorCode] == null) {
-      debugPrint("---UNHANDLED ERROR CODE--- \n${errorCode!}");
-    }
+    // /// For debug purposes
+    // if (_errorText[errorCode] == null) {
+    //   debugPrint("---UNHANDLED ERROR CODE--- \n${errorCode!}");
+    // }
     message = _errorText[errorCode] ?? "Unknown error! Please try again.";
     return message;
   }

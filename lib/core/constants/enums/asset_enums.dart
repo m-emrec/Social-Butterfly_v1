@@ -15,5 +15,6 @@ enum AssetsEnum {
   static const String _rootAnimationPath = "lib/core/assets/animations/";
   final String path;
 
+  /// This enum contains Asset paths.
   const AssetsEnum(this.path);
 }

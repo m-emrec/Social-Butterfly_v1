@@ -21,8 +21,7 @@ class _SignInPageState extends State<SignInPage> with SignInMixin {
       showForgotPassword: true,
       title: pageTitle,
       formKey: formKey,
-
-      /// Sign In button
+      // Sign In button
       primaryButton: Row(
         children: [
           ExpandedElevatedButton(

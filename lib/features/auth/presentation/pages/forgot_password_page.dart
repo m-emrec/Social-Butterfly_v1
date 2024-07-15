@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/constants/paddings.dart';
-import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/mixins/email_validator_mixin.dart';
 import '../../../../core/utils/mixins/loading_indicator_mixin.dart';
 import '../../../../core/utils/widgets/buttons.dart';
@@ -26,34 +25,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       bloc: authBloc,
-      listener: (context, state) {
-        switch (state) {
-          case AuthSuccessState():
-            disposeLoadingIndicator(context);
-            // context.pushReplacementNamed(SignInPage.routeName);
-
-            context.showSnack(
-              SuccessSnack(
-                context,
-                text: successMssg,
-              ),
-            );
-            break;
-          case AuthFailState():
-            disposeLoadingIndicator(context);
-            context.showSnack(
-              ErrorSnack(
-                context,
-                text: state.errmsg,
-              ),
-            );
-            break;
-          case AuthLoadingState():
-            showLoadingIndicator(context);
-            break;
-          default:
-        }
-      },
+      listener: blocListener,
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -88,5 +60,34 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
         ),
       ),
     );
+  }
+
+  void blocListener(context, state) {
+    switch (state) {
+      case AuthSuccessState():
+        disposeLoadingIndicator(context);
+        // context.pushReplacementNamed(SignInPage.routeName);
+
+        context.showSnack(
+          SuccessSnack(
+            context,
+            text: successMssg,
+          ),
+        );
+        break;
+      case AuthFailState():
+        disposeLoadingIndicator(context);
+        context.showSnack(
+          ErrorSnack(
+            context,
+            text: state.errmsg,
+          ),
+        );
+        break;
+      case AuthLoadingState():
+        showLoadingIndicator(context);
+        break;
+      default:
+    }
   }
 }

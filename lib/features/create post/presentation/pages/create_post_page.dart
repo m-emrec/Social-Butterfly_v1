@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:social_butterfly/core/utils/models/post_model.dart';
-import 'package:social_butterfly/features/create%20post/data/datasources/create_post_firebase_connection.dart';
 
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -30,28 +27,7 @@ class _CreatePostPageState extends State<CreatePostPage>
   Widget build(BuildContext context) {
     return BlocListener<CreatePostBloc, CreatePostState>(
       bloc: createPostBloc,
-      listener: (context, state) {
-        switch (state) {
-          case CreatePostLoadingState():
-            showLoadingIndicator(context);
-            break;
-          case CreatePostSuccessState():
-            disposeLoadingIndicator(context);
-            context.pushReplacementNamed(HomePage.routeName);
-            break;
-          case CreatePostFailState():
-            disposeLoadingIndicator(context);
-            context.showSnack(
-              ErrorSnack(
-                context,
-                text: state.errmsg,
-              ),
-            );
-            break;
-
-          default:
-        }
-      },
+      listener: blocListener,
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         resizeToAvoidBottomInset: false,
@@ -113,5 +89,28 @@ class _CreatePostPageState extends State<CreatePostPage>
         ),
       ),
     );
+  }
+
+  void blocListener(context, state) {
+    switch (state) {
+      case CreatePostLoadingState():
+        showLoadingIndicator(context);
+        break;
+      case CreatePostSuccessState():
+        disposeLoadingIndicator(context);
+        context.pushReplacementNamed(HomePage.routeName);
+        break;
+      case CreatePostFailState():
+        disposeLoadingIndicator(context);
+        context.showSnack(
+          ErrorSnack(
+            context,
+            text: state.errmsg,
+          ),
+        );
+        break;
+
+      default:
+    }
   }
 }

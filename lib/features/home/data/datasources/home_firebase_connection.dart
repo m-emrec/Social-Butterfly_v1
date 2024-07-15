@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:social_butterfly/logger.dart';
 
 import '../../../../core/constants/enums/firebase_keys_enum.dart';
 
@@ -44,7 +43,6 @@ class HomeFirebaseConnection extends FireBaseConnection {
     } on RangeError {
       return DataSuccess(null);
     } catch (e) {
-      logger.e(e);
       return DataFailed(e);
     }
   }
