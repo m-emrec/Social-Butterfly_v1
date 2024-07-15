@@ -91,7 +91,7 @@ class _CreatePostPageState extends State<CreatePostPage>
     );
   }
 
-  void blocListener(context, state) {
+  void blocListener(BuildContext context, CreatePostState state) {
     switch (state) {
       case CreatePostLoadingState():
         showLoadingIndicator(context);

@@ -23,7 +23,7 @@ class HomeAppBar extends StatelessWidget {
 
       /// This is for debug purposes.
       leading: GestureDetector(
-        // onTap:  () => FirebaseAuth.instance.signOut(),
+        onTap: () => FirebaseAuth.instance.signOut(),
         child: Image.asset(AssetsEnum.appLogoIcon.path),
       ),
       actions: [
