@@ -6,9 +6,10 @@ import 'post_widget_skeleton.dart';
 
 class LoaderWidget extends StatefulWidget {
   final int index;
+  final HomeBloc homeBloc;
 
   /// This widget calls [HomeUpdatePostListEvent] when it is built.
-  const LoaderWidget({super.key, required this.index});
+  const LoaderWidget({super.key, required this.index, required this.homeBloc});
 
   @override
   State<LoaderWidget> createState() => _LoaderWidgetState();
@@ -17,11 +18,9 @@ class LoaderWidget extends StatefulWidget {
 class _LoaderWidgetState extends State<LoaderWidget> {
   @override
   void initState() {
-    super.initState();
-    final HomeBloc homeBloc = GetIt.instance<HomeBloc>();
-
     /// add [HomeUpdatePostListEvent] to [HomeBloc]
-    homeBloc.add(HomeUpdatePostListEvent(widget.index));
+    widget.homeBloc.add(HomeUpdatePostListEvent(widget.index));
+    super.initState();
   }
 
   @override

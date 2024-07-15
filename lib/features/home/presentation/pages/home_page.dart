@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage>
                         visible: !seenAll,
                         child: LoaderWidget(
                           index: index,
+                          homeBloc: homeBloc,
                         ),
                       ),
                     ],

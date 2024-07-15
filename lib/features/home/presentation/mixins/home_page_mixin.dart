@@ -57,7 +57,6 @@ mixin HomePageMixin on State<HomePage> {
 
   @override
   void initState() {
-    // HomeInjectionContainer().dispose();
     HomeInjectionContainer().initialize();
     homeBloc = GetIt.instance<HomeBloc>();
     homeBloc.add(const HomeFetchPostListEvent());
