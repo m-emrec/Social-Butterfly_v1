@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:social_butterfly/logger.dart';
 
 abstract class InjectionContainer {
   final GetIt _sl = GetIt.instance;
@@ -13,11 +12,12 @@ abstract class InjectionContainer {
   Future<void> dispose();
 
   /// Check if the given Object is already registered
-  bool isRegistered(instance) => sl.isRegistered(instance: instance);
+  bool isRegistered<T extends Object>(instance) =>
+      sl.isRegistered<T>(instance: instance);
 
   /// Unregister the singleton if it is registered.
   Future<void> unRegister<T extends Object>(Object? object) async {
-    final bool registered = isRegistered(object);
+    final bool registered = isRegistered<T>(object);
     if (registered) await sl.unregister<T>(instance: object);
   }
 

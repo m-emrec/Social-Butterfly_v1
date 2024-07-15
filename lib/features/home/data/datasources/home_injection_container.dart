@@ -1,3 +1,5 @@
+import 'package:social_butterfly/logger.dart';
+
 import '../../../../core/resources/injection_container.dart';
 import '../../domain/repositories/home_repo.dart';
 import '../../domain/usecases/fetch_post_data_usecase.dart';
@@ -9,19 +11,18 @@ import 'home_firebase_connection.dart';
 class HomeInjectionContainer extends InjectionContainer {
   @override
   Future<void> dispose() async {
-    unRegister(HomeFirebaseConnection);
-    unRegister(HomeRepo);
-    unRegister(FetchPostDataUsecase);
-    unRegister(HomeBloc);
+    await sl.reset();
   }
 
   @override
   Future<void> initialize() async {
-    register<HomeFirebaseConnection>(HomeFirebaseConnection());
-    register<HomeRepo>(HomeRepoImpl(firebaseConnection: sl()));
+    try {
+      register<HomeFirebaseConnection>(HomeFirebaseConnection());
+      register<HomeRepo>(HomeRepoImpl(firebaseConnection: sl()));
 
-    register<UpdateListOfPostDataUsecase>(UpdateListOfPostDataUsecase(sl()));
-    register<FetchPostDataUsecase>(FetchPostDataUsecase(homeRepo: sl()));
-    register<HomeBloc>(HomeBloc(sl(), sl()));
+      register<UpdateListOfPostDataUsecase>(UpdateListOfPostDataUsecase(sl()));
+      register<FetchPostDataUsecase>(FetchPostDataUsecase(homeRepo: sl()));
+      register<HomeBloc>(HomeBloc(sl(), sl()));
+    } catch (e) {}
   }
 }

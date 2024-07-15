@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../core/utils/models/post_model.dart';
 import '../bloc/home_bloc.dart';
 import 'post_widget_skeleton.dart';
 
 class LoaderWidget extends StatefulWidget {
-  final List<PostModel> postList;
+  final int index;
 
   /// This widget calls [HomeUpdatePostListEvent] when it is built.
-  const LoaderWidget({super.key, required this.postList});
+  const LoaderWidget({super.key, required this.index});
 
   @override
   State<LoaderWidget> createState() => _LoaderWidgetState();
@@ -23,7 +22,7 @@ class _LoaderWidgetState extends State<LoaderWidget> {
     homeBloc = GetIt.instance<HomeBloc>();
 
     /// add [HomeUpdatePostListEvent] to [HomeBloc]
-    homeBloc.add(HomeUpdatePostListEvent(widget.postList));
+    homeBloc.add(HomeUpdatePostListEvent(widget.index));
   }
 
   @override

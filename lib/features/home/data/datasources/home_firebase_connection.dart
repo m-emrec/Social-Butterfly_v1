@@ -28,19 +28,18 @@ class HomeFirebaseConnection extends FireBaseConnection {
     }
   }
 
-  Future<DataState<PostModel>> updatePostList(List<PostModel> postList) async {
+  Future<DataState<PostModel>> updatePostList(int index) async {
     try {
       final QuerySnapshot<Map<String, dynamic>> query =
           await _getOrderedQuery();
       final QueryDocumentSnapshot<Map<String, dynamic>> newPost =
-          query.docs[postList.length];
+          query.docs[index];
 
       final String publishedBy =
           await _findUserName(newPost[FirebaseKeysEnum.publishedBy.name]);
 
       final PostModel model =
           PostModel.fromMap(newPost.data()).copyWith(publishedBy: publishedBy);
-
       return DataSuccess(model);
     } on RangeError {
       return DataSuccess(null);

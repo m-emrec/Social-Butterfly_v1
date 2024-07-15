@@ -9,8 +9,10 @@ import '../../../../core/utils/widgets/buttons.dart';
 import '../../../create%20post/presentation/pages/create_post_page.dart';
 
 class HomeAppBar extends StatelessWidget {
+  final void Function()? onPressed;
   const HomeAppBar({
     super.key,
+    this.onPressed,
   });
 
   void _onCreatePostPressed(BuildContext context) {
@@ -31,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(right: AppPaddings.smallPadding),
           child: CustomIconButton(
-            onPressed: () => _onCreatePostPressed(context),
+            onPressed: onPressed,
             icon: Icon(
               Icons.add,
               color: AppColors.backgroundColor,

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:social_butterfly/logger.dart';
@@ -9,6 +7,7 @@ import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/models/post_model.dart';
 import '../../../../core/utils/widgets/custom_snack_bar.dart';
+import '../../../create post/presentation/pages/create_post_page.dart';
 import '../../data/datasources/home_injection_container.dart';
 import '../bloc/home_bloc.dart';
 import '../pages/home_page.dart';
@@ -17,9 +16,9 @@ import '../widgets/post_body.dart';
 
 mixin HomePageMixin on State<HomePage> {
   late HomeBloc homeBloc;
-  List<PostModel> postList = [];
-  bool seenAll = false;
-
+  late List<PostModel> postList;
+  late bool seenAll;
+  late int index;
   ThemeData get theme => context.theme.copyWith(
         textTheme: context.textTheme.copyWith(
           titleSmall: TextStyle(color: AppColors.secondaryColor),
@@ -55,28 +54,34 @@ mixin HomePageMixin on State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
+    // HomeInjectionContainer().dispose();
     HomeInjectionContainer().initialize();
     homeBloc = GetIt.instance<HomeBloc>();
     homeBloc.add(const HomeFetchPostListEvent());
+    seenAll = false;
+    postList = [];
+    index = 0;
+    super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    HomeInjectionContainer().dispose();
+  void onCreatePostPressed(BuildContext context) async {
+    await HomeInjectionContainer().dispose();
+    context.pushNamed(CreatePostPage.routeName);
   }
 
   void blocListener(BuildContext context, state) {
     if (state is HomeSuccessState) {
-      postList = state.listOfPostModel;
+      postList.addAll(state.listOfPostModel);
+      index = postList.length;
+
       setState(() {});
-      logger.e(postList.length);
     }
     if (state is HomeUpdateListState) {
-      setState(() {
-        postList.add(state.listOfPostModel);
-      });
+      index = postList.length + 1;
+
+      postList.add(state.postModel);
+
+      setState(() {});
     }
     if (state is HomeEndOFListState) {
       setState(() {

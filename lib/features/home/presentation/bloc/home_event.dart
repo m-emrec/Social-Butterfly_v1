@@ -12,6 +12,6 @@ class HomeFetchPostListEvent extends HomeEvent {
 }
 
 class HomeUpdatePostListEvent extends HomeEvent {
-  final List<PostModel> postList;
-  const HomeUpdatePostListEvent(this.postList);
+  final int index;
+  const HomeUpdatePostListEvent(this.index);
 }

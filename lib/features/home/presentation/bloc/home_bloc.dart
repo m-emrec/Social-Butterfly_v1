@@ -37,19 +37,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> onHomeUpdatePostListEvent(
       HomeUpdatePostListEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
-    final DataState dataState =
-        await _updateListOfPostDataUsecase.call(event.postList);
+    if (event.index > 0) {
+      emit(HomeLoadingState());
+      final DataState dataState =
+          await _updateListOfPostDataUsecase.call(event.index);
 
-    if (dataState is DataSuccess) {
-      /// if dataState.data is null that means there is no more post to see.
-      if (dataState.data == null) {
-        emit(const HomeEndOFListState());
+      if (dataState is DataSuccess) {
+        /// if dataState.data is null that means there is no more post to see.
+        if (dataState.data == null) {
+          emit(const HomeEndOFListState());
+        } else {
+          emit(HomeUpdateListState(dataState.data));
+        }
       } else {
-        emit(HomeUpdateListState(dataState.data));
+        emit(HomeFailState(dataState.exception));
       }
-    } else {
-      emit(HomeFailState(dataState.exception));
     }
   }
 }
