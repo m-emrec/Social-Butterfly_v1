@@ -7,15 +7,14 @@ import '../../../../core/resources/fire_store_connection.dart';
 import '../../../../core/utils/models/post_model.dart';
 
 class HomeFirebaseConnection extends FireBaseConnection {
-  Future<DataState<List<PostModel>>> fetchPostData(
-      List<PostModel> fetchedPostList) async {
+  Future<DataState<List<PostModel>>> fetchPostData() async {
     List<PostModel> postList = [];
     try {
       final QuerySnapshot<Map<String, dynamic>> query =
           await _getOrderedQuery();
 
       Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfFirst3Post =
-          _getRangeListOfDocs(query: query);
+          _getFirst3Post(query: query);
 
       postList = await _createPostList(postList, listOfFirst3Post);
 
@@ -41,12 +40,15 @@ class HomeFirebaseConnection extends FireBaseConnection {
           PostModel.fromMap(newPost.data()).copyWith(publishedBy: publishedBy);
       return DataSuccess(model);
     } on RangeError {
+      /// If there is a [RangeError] that means , there is no more Post to show.
+      /// So it returns [null]
       return DataSuccess(null);
     } catch (e) {
       return DataFailed(e);
     }
   }
 
+  /// Get the ordered list by [createdDate]
   Future<QuerySnapshot<Map<String, dynamic>>> _getOrderedQuery() async {
     final QuerySnapshot<Map<String, dynamic>> query = await postsCollection()
         .orderBy(FirebaseKeysEnum.createdDate.name, descending: true)
@@ -54,7 +56,10 @@ class HomeFirebaseConnection extends FireBaseConnection {
     return query;
   }
 
-  Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> _getRangeListOfDocs({
+  /// Get the first 3 document from the query.
+  /// To be honest I choose this number randomly. So there is no meaningful
+  /// reason behind that :)
+  Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> _getFirst3Post({
     required QuerySnapshot<Map<String, dynamic>> query,
   }) {
     Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
@@ -68,6 +73,7 @@ class HomeFirebaseConnection extends FireBaseConnection {
       Iterable<QueryDocumentSnapshot<Map<String, dynamic>>>
           listOfFirst3Post) async {
     for (var doc in listOfFirst3Post) {
+      /// Because I stored publishedBy as a [uid] I have to find the user name to show on Post.
       String publishedBy =
           await _findUserName(doc[FirebaseKeysEnum.publishedBy.name]);
       PostModel model =
@@ -79,6 +85,9 @@ class HomeFirebaseConnection extends FireBaseConnection {
     return list;
   }
 
+  /// This function takes an [uid] and finds the username correspond to the given [uid].
+  /// The reason I do that , I stored the [publishedBy] as [uid] . So , to show the
+  /// user name on the Post , first I have to find the username.
   Future<String> _findUserName(String? uid) async {
     final String publishedBy = await firestore
         .collection(FirebaseKeysEnum.Users.name)

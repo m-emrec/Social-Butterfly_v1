@@ -6,7 +6,6 @@ import '../../../../core/constants/enums/asset_enums.dart';
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/widgets/buttons.dart';
-import '../../../create%20post/presentation/pages/create_post_page.dart';
 
 class HomeAppBar extends StatelessWidget {
   final void Function()? onPressed;
@@ -15,19 +14,18 @@ class HomeAppBar extends StatelessWidget {
     this.onPressed,
   });
 
-  void _onCreatePostPressed(BuildContext context) {
-    context.pushNamed(CreatePostPage.routeName);
-  }
-
   final String socialText = "Social ";
   final String butterflyText = "Butterfly";
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: title(context),
+
+      /// This is for debug purposes.
       leading: GestureDetector(
-          onTap: () => FirebaseAuth.instance.signOut(),
-          child: Image.asset(AssetsEnum.appLogoIcon.path)),
+        // onTap:  () => FirebaseAuth.instance.signOut(),
+        child: Image.asset(AssetsEnum.appLogoIcon.path),
+      ),
       actions: [
         // Create new post button.
         Padding(

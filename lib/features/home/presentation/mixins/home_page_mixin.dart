@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:social_butterfly/logger.dart';
 
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/paddings.dart';
@@ -19,6 +18,9 @@ mixin HomePageMixin on State<HomePage> {
   late List<PostModel> postList;
   late bool seenAll;
   late int index;
+
+  /// I used different theme for some of the properties , because of that I override
+  /// some of the theme properties here.
   ThemeData get theme => context.theme.copyWith(
         textTheme: context.textTheme.copyWith(
           titleSmall: TextStyle(color: AppColors.secondaryColor),
@@ -31,6 +33,7 @@ mixin HomePageMixin on State<HomePage> {
         ),
       );
 
+  /// Return a list of [PostBody] wrapped in an [Inkwell]
   // ignore: non_constant_identifier_names
   Iterable<Widget> PostList() {
     return postList.map(

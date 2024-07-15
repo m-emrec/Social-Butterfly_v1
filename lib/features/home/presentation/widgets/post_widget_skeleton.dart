@@ -9,6 +9,8 @@ import '../../../../core/utils/models/post_model.dart';
 class PostWidgetSkeleton extends StatelessWidget {
   const PostWidgetSkeleton({super.key});
 
+  /// A Dummy for building the skeleton.
+  // ignore: non_constant_identifier_names
   PostModel get _DUMMY_POST => PostModel(
         id: "",
         commentCount: 0,

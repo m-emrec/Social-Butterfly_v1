@@ -10,6 +10,7 @@ class PostBody extends StatelessWidget {
   final PostModel postModel;
   const PostBody({super.key, required this.postModel});
 
+  /// Check if this Post contains an image.
   bool get _isPostWithImage => postModel.imageUrl != "";
 
   @override
@@ -41,7 +42,9 @@ class PostBody extends StatelessWidget {
 }
 
 class ImageWidget extends StatelessWidget {
+  /// This widget holds the image if it is exist.
   const ImageWidget({
+    super.key,
     required bool isPostWithImage,
     required this.postModel,
   }) : _isPostWithImage = isPostWithImage;

@@ -24,7 +24,7 @@ class PostDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Image
+            /// Image Container
             ImageWidget(
                 isPostWithImage: _isPostWithImage, postModel: postModel),
             Gap(AppPaddings.smallPadding),

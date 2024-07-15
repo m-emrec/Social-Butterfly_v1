@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:social_butterfly/logger.dart';
 
 import '../../../../core/resources/data_state.dart';
 import '../../../../core/utils/models/post_model.dart';
@@ -13,7 +12,6 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  int postIndex = 3;
   final FetchPostDataUsecase _fetchPostDataUsecase;
   final UpdateListOfPostDataUsecase _updateListOfPostDataUsecase;
   HomeBloc(this._fetchPostDataUsecase, this._updateListOfPostDataUsecase)

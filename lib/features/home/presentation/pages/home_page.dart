@@ -40,6 +40,8 @@ class _HomePageState extends State<HomePage>
                   child: ListView(
                     children: [
                       ...PostList(),
+
+                      /// If [seenAll] is true this widget won't be visible.
                       Visibility(
                         visible: !seenAll,
                         child: LoaderWidget(

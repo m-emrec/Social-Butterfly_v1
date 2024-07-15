@@ -116,6 +116,7 @@ class AppColors {
   static Color darkTextColor = const Color(0xff0A2342);
   static Color lightTextColor = const Color(0xffF4F4F9);
   static Color errorColor = Colors.red.shade600;
+  static Color successColor = Colors.green.shade600;
 }
 
 class _AppTextThemes {

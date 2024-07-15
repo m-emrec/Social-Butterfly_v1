@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_butterfly/config/theme/app_theme.dart';
 import '../../extensions/context_extension.dart';
 
-abstract class Snack extends SnackBar {
-  const Snack(
+abstract class _Snack extends SnackBar {
+  const _Snack(
     this.context, {
     this.text,
     super.key,
@@ -23,22 +24,22 @@ abstract class Snack extends SnackBar {
   DismissDirection get dismissDirection => DismissDirection.horizontal;
 }
 
-class ErrorSnack extends Snack {
+class ErrorSnack extends _Snack {
   const ErrorSnack(
     super.context, {
     super.key,
     super.text,
   });
   @override
-  Color? get backgroundColor => Colors.red.shade600;
+  Color? get backgroundColor => AppColors.errorColor;
 }
 
-class SuccessSnack extends Snack {
+class SuccessSnack extends _Snack {
   const SuccessSnack(
     super.context, {
     super.key,
     super.text,
   });
   @override
-  Color? get backgroundColor => Colors.green.shade600;
+  Color? get backgroundColor => AppColors.successColor;
 }

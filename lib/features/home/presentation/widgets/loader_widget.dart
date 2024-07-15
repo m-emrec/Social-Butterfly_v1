@@ -15,11 +15,10 @@ class LoaderWidget extends StatefulWidget {
 }
 
 class _LoaderWidgetState extends State<LoaderWidget> {
-  late HomeBloc homeBloc;
   @override
   void initState() {
     super.initState();
-    homeBloc = GetIt.instance<HomeBloc>();
+    final HomeBloc homeBloc = GetIt.instance<HomeBloc>();
 
     /// add [HomeUpdatePostListEvent] to [HomeBloc]
     homeBloc.add(HomeUpdatePostListEvent(widget.index));
