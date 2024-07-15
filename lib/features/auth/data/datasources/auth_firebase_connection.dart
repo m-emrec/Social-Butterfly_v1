@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:social_butterfly/core/constants/enums/firebase_keys_enum.dart';
+import '../../../../core/constants/enums/firebase_keys_enum.dart';
 
 import '../../../../core/resources/data_state.dart';
 
@@ -27,19 +27,14 @@ class AuthFirebaseConnection extends FireBaseConnection {
     required String userName,
   }) async {
     try {
+      /// get user credentials to obtain uid.
       final UserCredential _user =
           await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      firestore
-          .collection(FirebaseKeysEnum.Users.name)
-          .doc(_user.user!.uid)
-          .set({
-        FirebaseKeysEnum.userName.name: userName,
-      });
-
+      await saveUserToFireStore(_user.user!.uid, userName);
       return DataSuccess(null);
     } on FirebaseAuthException catch (e) {
       return DataFailed(e.code);
@@ -73,5 +68,11 @@ class AuthFirebaseConnection extends FireBaseConnection {
     } catch (e) {
       return DataFailed(e.toString());
     }
+  }
+
+  Future<void> saveUserToFireStore(String uid, String userName) async {
+    await firestore.collection(FirebaseKeysEnum.Users.name).doc(uid).set({
+      FirebaseKeysEnum.userName.name: userName,
+    });
   }
 }

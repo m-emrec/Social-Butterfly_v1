@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:social_butterfly/core/utils/models/post_model.dart';
+import 'package:social_butterfly/features/create%20post/data/datasources/create_post_firebase_connection.dart';
 
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -100,7 +103,7 @@ class _CreatePostPageState extends State<CreatePostPage>
                         constraints: BoxConstraints(
                           maxHeight: context.screenSize.height * .2,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

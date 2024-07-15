@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:social_butterfly/logger.dart';
 
 import '../../../../core/resources/data_state.dart';
 import '../../../../core/utils/models/post_model.dart';
@@ -26,6 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeFetchPostListEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     final DataState dataState = await _fetchPostDataUsecase.call(null);
+
     if (dataState is DataSuccess) {
       emit(HomeSuccessState(listOfPostModel: dataState.data));
     } else {
@@ -38,6 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoadingState());
     final DataState dataState =
         await _updateListOfPostDataUsecase.call(event.postList);
+
     if (dataState is DataSuccess) {
       /// if dataState.data is null that means there is no more post to see.
       if (dataState.data == null) {

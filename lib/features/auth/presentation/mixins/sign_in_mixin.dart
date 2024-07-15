@@ -28,6 +28,13 @@ mixin SignInMixin on State<SignInPage> {
   }
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     authBloc = GetIt.instance();

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -11,9 +10,10 @@ import '../../../../core/utils/mixins/loading_indicator_mixin.dart';
 import '../../../../core/utils/widgets/custom_form_field.dart';
 import '../../../../core/utils/widgets/custom_snack_bar.dart';
 import '../bloc/auth_bloc.dart';
+import '../mixins/base_auth_page_mixin.dart';
 import '../pages/forgot_password_page.dart';
 
-class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
+class BaseAuthPage extends StatefulWidget {
   const BaseAuthPage({
     super.key,
     required this.title,
@@ -49,23 +49,21 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
   final bool showNameField;
   final AuthBloc authBloc;
 
-  Widget get divider => const Row(
-        children: [
-          Expanded(child: Divider()),
-          Text("OR"),
-          Expanded(child: Divider()),
-        ],
-      );
+  @override
+  State<BaseAuthPage> createState() => _BaseAuthPageState();
+}
 
+class _BaseAuthPageState extends State<BaseAuthPage>
+    with LoadingIndicatorMixin, BaseAuthPageMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      bloc: authBloc,
+      bloc: widget.authBloc,
       listener: blocListener,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text(title),
+          title: Text(widget.title),
         ),
         extendBodyBehindAppBar: true,
         body: DecoratedBox(
@@ -84,31 +82,31 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
               children: [
                 /// Form Field
                 Form(
-                  key: formKey,
+                  key: widget.formKey,
                   child: Column(
                     children: [
                       Visibility(
-                        visible: showNameField,
+                        visible: widget.showNameField,
                         child: NormalTextFormField(
-                          controller: nameController,
+                          controller: widget.nameController,
                           label: "User name",
-                          validator: nameValidator,
+                          validator: widget.nameValidator,
                         ),
                       ),
                       Gap(AppPaddings.mediumPadding),
 
                       /// email field
                       EmailField(
-                        controller: emailController,
-                        validator: emailValidator,
+                        controller: widget.emailController,
+                        validator: widget.emailValidator,
                       ),
                       // gap
                       Gap(AppPaddings.mediumPadding),
                       // password field
                       PasswordField(
-                        validator: passwordValidator,
-                        controller: passwordController,
-                        helper: showForgotPassword
+                        validator: widget.passwordValidator,
+                        controller: widget.passwordController,
+                        helper: widget.showForgotPassword
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -134,12 +132,12 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
                 Gap(AppPaddings.smallPadding),
 
                 /// Text Button
-                textButton,
+                widget.textButton,
 
                 Gap(AppPaddings.smallPadding),
 
                 /// Sign In button
-                primaryButton,
+                widget.primaryButton,
                 Gap(AppPaddings.largePadding),
 
                 /// Divider
@@ -147,7 +145,7 @@ class BaseAuthPage extends StatelessWidget with LoadingIndicatorMixin {
                 Gap(AppPaddings.largePadding),
 
                 /// Google Sign In button
-                googleButton,
+                widget.googleButton,
               ],
             ),
           ),

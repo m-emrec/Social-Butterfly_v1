@@ -9,7 +9,7 @@ class UpdateListOfPostDataUsecase
 
   UpdateListOfPostDataUsecase(this._homeRepo);
   @override
-  Future<DataState<List<PostModel>>> call(List<PostModel> params) {
-    return _homeRepo.updateListOfPostData(params);
+  Future<DataState<List<PostModel>>> call(List<PostModel> params) async {
+    return await _homeRepo.updateListOfPostData(params);
   }
 }

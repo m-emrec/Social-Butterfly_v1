@@ -123,5 +123,8 @@ class _AppTextThemes {
     titleLarge: TextStyle(
       color: AppColors.darkTextColor,
     ),
+    titleMedium: TextStyle(
+      color: AppColors.darkTextColor,
+    ),
   );
 }

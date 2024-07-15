@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/constants/enums/asset_enums.dart';
 
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/models/post_model.dart';
-import '../../../../core/utils/widgets/buttons.dart';
 
 class PostBody extends StatelessWidget {
   final PostModel postModel;
@@ -36,60 +34,8 @@ class PostBody extends StatelessWidget {
             style: context.textTheme.bodySmall,
           ),
           Gap(AppPaddings.xxsmallPadding),
-          // _ButtonRow(
-          //   commentCount: postModel.commentCount,
-          //   likeCount: postModel.likeCount,
-          // ),
         ],
       ),
-    );
-  }
-}
-
-class _ButtonRow extends StatelessWidget {
-  final int? commentCount;
-  final int? likeCount;
-  const _ButtonRow({
-    this.commentCount = 0,
-    this.likeCount = 0,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Column(
-          children: [
-            CustomIconButton(
-              isFilled: false,
-              onPressed: () => {},
-              icon: Image.asset(
-                AssetsEnum.like.path,
-                fit: BoxFit.contain,
-              ),
-            ),
-            Text(
-              likeCount.toString(),
-              style: context.textTheme.labelSmall,
-            )
-          ],
-        ),
-        Gap(AppPaddings.mediumPadding),
-        Column(
-          children: [
-            CustomIconButton(
-              isFilled: false,
-              onPressed: () {},
-              icon: Image.asset(
-                AssetsEnum.comment.path,
-                fit: BoxFit.contain,
-              ),
-            ),
-            Text(commentCount.toString(), style: context.textTheme.labelSmall)
-          ],
-        )
-      ],
     );
   }
 }

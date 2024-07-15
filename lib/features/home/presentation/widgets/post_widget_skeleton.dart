@@ -5,7 +5,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/constants/paddings.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/models/post_model.dart';
-import '../../../../core/utils/widgets/buttons.dart';
 
 class PostWidgetSkeleton extends StatelessWidget {
   const PostWidgetSkeleton({super.key});
@@ -58,20 +57,6 @@ class PostWidgetSkeleton extends StatelessWidget {
               style: context.textTheme.bodySmall,
             ),
             Gap(AppPaddings.xsmallPadding),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomIconButton(
-                  onPressed: () => {},
-                  icon: const Icon(Icons.abc),
-                ),
-                Gap(AppPaddings.mediumPadding),
-                CustomIconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.abc),
-                )
-              ],
-            ),
           ],
         ),
       ),

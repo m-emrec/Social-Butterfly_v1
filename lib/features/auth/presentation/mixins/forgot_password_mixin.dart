@@ -14,6 +14,7 @@ mixin ForgotPasswordMixin on State<ForgotPasswordPage> {
   final String buttonText = "Send Reset Email";
 
   onForgotPasswordButtonPressed() {
+    /// if the forms are valid then add [AuthForgotPasswordEvent]
     if (formKey.currentState!.validate()) {
       authBloc.add(
         AuthForgotPasswordEvent(
@@ -31,5 +32,11 @@ mixin ForgotPasswordMixin on State<ForgotPasswordPage> {
   void initState() {
     super.initState();
     authBloc = GetIt.instance();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
   }
 }

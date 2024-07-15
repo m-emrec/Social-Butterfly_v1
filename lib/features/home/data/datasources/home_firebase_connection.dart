@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:social_butterfly/logger.dart';
 
 import '../../../../core/constants/enums/firebase_keys_enum.dart';
 
@@ -9,16 +10,16 @@ import '../../../../core/utils/models/post_model.dart';
 class HomeFirebaseConnection extends FireBaseConnection {
   Future<DataState<List<PostModel>>> fetchPostData(
       List<PostModel> fetchedPostList) async {
+    // logger.i(fetchedPostList);
     List<PostModel> postList = [];
     try {
       final QuerySnapshot<Map<String, dynamic>> query =
           await _getOrderedQuery();
 
-      Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
-          _getRangeListOfDocs(
-              start: fetchedPostList.length, end: 3, query: query);
+      QueryDocumentSnapshot<Map<String, dynamic>> postDoc =
+          _getRangeListOfDocs(index: fetchedPostList.length, query: query);
 
-      postList = await _createPostList(postList, listOfPostDocs);
+      postList = await _createPostList(postList, postDoc);
 
       return DataSuccess(postList);
     } on RangeError {
@@ -35,27 +36,26 @@ class HomeFirebaseConnection extends FireBaseConnection {
     return query;
   }
 
-  Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> _getRangeListOfDocs({
-    required int start,
-    required int end,
+  QueryDocumentSnapshot<Map<String, dynamic>> _getRangeListOfDocs({
+    required int index,
     required QuerySnapshot<Map<String, dynamic>> query,
   }) {
-    Iterable<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
-        query.docs.getRange(start, start + 3);
-    return listOfPostDocs;
+    logger.i(index);
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> listOfPostDocs =
+        query.docs;
+
+    return listOfPostDocs[index];
   }
 
-  Future<List<PostModel>> _createPostList(
-      List<PostModel> list,
-      Iterable<QueryDocumentSnapshot<Map<String, dynamic>>>
-          listOfPostDocs) async {
-    for (var doc in listOfPostDocs) {
-      String publishedBy =
-          await _findUserName(doc[FirebaseKeysEnum.publishedBy.name]);
-      PostModel model =
-          PostModel.fromMap(doc.data()).copyWith(publishedBy: publishedBy);
-      list.add(model);
-    }
+  Future<List<PostModel>> _createPostList(List<PostModel> list,
+      QueryDocumentSnapshot<Map<String, dynamic>> postDoc) async {
+    String publishedBy =
+        await _findUserName(postDoc[FirebaseKeysEnum.publishedBy.name]);
+    PostModel model =
+        PostModel.fromMap(postDoc.data()).copyWith(publishedBy: publishedBy);
+
+    list.add(model);
+
     return list;
   }
 

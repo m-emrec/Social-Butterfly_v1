@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:social_butterfly/logger.dart';
 import '../../../../core/utils/models/post_model.dart';
 import '../../data/datasources/create_post_injection_container.dart';
 import '../bloc/create_post_bloc.dart';

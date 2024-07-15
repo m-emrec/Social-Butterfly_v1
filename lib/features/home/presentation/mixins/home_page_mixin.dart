@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:social_butterfly/features/home/presentation/pages/post_detail_page.dart';
 import 'package:social_butterfly/logger.dart';
 
 import '../../../../config/theme/app_theme.dart';
@@ -11,6 +12,7 @@ import '../../../../core/utils/widgets/custom_snack_bar.dart';
 import '../../data/datasources/home_injection_container.dart';
 import '../bloc/home_bloc.dart';
 import '../pages/home_page.dart';
+import '../pages/post_detail_page.dart';
 import '../widgets/post_body.dart';
 
 mixin HomePageMixin on State<HomePage> {
@@ -69,6 +71,8 @@ mixin HomePageMixin on State<HomePage> {
     if (state is HomeSuccessState) {
       postList = state.listOfPostModel;
       setState(() {});
+      sleep(Duration(seconds: 3));
+      logger.e(postList.length);
     }
     if (state is HomeUpdateListState) {
       setState(() {

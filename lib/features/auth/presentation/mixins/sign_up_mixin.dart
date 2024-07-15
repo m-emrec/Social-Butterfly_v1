@@ -41,6 +41,14 @@ mixin SignUpMixin on State<SignUpPage> {
     authBloc = GetIt.instance();
   }
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
+
   void navigateToSignIn(BuildContext context) {
     context.pushReplacementNamed(SignInPage.routeName);
   }
